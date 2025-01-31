@@ -185,7 +185,7 @@ fun GridViewItem(
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
             ) {
-                catBreed.temperament.forEach { behaviour ->
+                catBreed.temperament.take(6).forEach { behaviour ->
                     Surface(
                         modifier = Modifier.padding(4.dp),
                         shape = RoundedCornerShape(16.dp),
