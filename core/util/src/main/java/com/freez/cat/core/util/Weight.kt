@@ -1,4 +1,4 @@
-package com.freez.cat.data.remote.theCatApi.entity
+package com.freez.cat.core.util
 
 data class Weight(
     val imperial: String,

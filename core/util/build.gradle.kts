@@ -1,12 +1,10 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.hilt.android)
-    id("kotlin-kapt")
 }
 
 android {
-    namespace = "com.freez.cat.data.local.roomdatabase"
+    namespace = "com.freez.cat.core.util"
     compileSdk = 35
 
     defaultConfig {
@@ -32,26 +30,14 @@ android {
     kotlinOptions {
         jvmTarget = "17"
     }
+}
 
-}
-kapt {
-    correctErrorTypes = true
-}
 dependencies {
-    implementation(project(":core:util"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-
-    // hilt
-    implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
-
-    // room
-    implementation(libs.androidx.room.runtime)
-    kapt(libs.androidx.room.compiler)
-    implementation(libs.androidx.room.ktx)
 }
