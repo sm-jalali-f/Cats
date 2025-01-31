@@ -45,7 +45,12 @@ kapt {
     correctErrorTypes = true
 }
 dependencies {
-
+    implementation(project(":catbreed:presentation"))
+    implementation(project(":core:util"))
+    implementation(project(":data:local:roomDatabase"))
+    implementation(project(":data:remote:theCatApi"))
+    implementation(project(":catbreed:repository"))
+    implementation(project(":catbreed:domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -68,4 +73,12 @@ dependencies {
 
     //navigation
     implementation(libs.androidx.navigation.compose)
+
+    // room
+    implementation(libs.androidx.room.runtime)
+
+    //retrofit
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
+    implementation(libs.logging.interceptor)
 }

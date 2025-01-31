@@ -1,6 +1,6 @@
 package com.freez.cat.data.remote.theCatApi.entity
 
-import com.freez.cat.core.util.CatImage
+import com.freez.cat.core.util.Image
 import com.freez.cat.core.util.Weight
 
 data class CatBreedResponseItem(
@@ -20,7 +20,7 @@ data class CatBreedResponseItem(
     val health_issues: Int,
     val hypoallergenic: Int,
     val id: String,
-    val image: CatImage,
+    val image: Image,
     val indoor: Int,
     val intelligence: Int,
     val lap: Int?,

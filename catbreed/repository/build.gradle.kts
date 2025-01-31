@@ -39,6 +39,7 @@ kapt {
 dependencies {
     implementation(project(":core:util"))
     implementation(project(":data:remote:theCatApi"))
+    implementation(project(":data:local:roomDatabase"))
     implementation(project(":catbreed:domain"))
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
@@ -49,4 +50,5 @@ dependencies {
     //hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+    implementation (libs.retrofit)
 }

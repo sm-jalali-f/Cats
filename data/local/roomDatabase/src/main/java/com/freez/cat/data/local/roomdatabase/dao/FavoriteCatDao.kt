@@ -11,14 +11,14 @@ import kotlinx.coroutines.flow.Flow
 interface FavoriteCatDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBookmark(bookmark: FavoriteCatsEntity)
+    fun insert(favorite: FavoriteCatsEntity)
 
-    @Query("DELETE FROM bookmarked_videos WHERE videoId = :videoId")
-    fun removeBookmark(videoId: Long)
+    @Query("DELETE FROM favorite_cats WHERE catId = :catId")
+    fun remove(catId: String)
 
-    @Query("SELECT * FROM bookmarked_videos")
-    fun getAllBookmarks(): Flow<List<BookmarkedVideo>>
+    @Query("SELECT EXISTS (SELECT 1 FROM favorite_cats WHERE catId = :catId)")
+    fun isFavorite(catId: String): Flow<Boolean>
 
-    @Query("SELECT EXISTS (SELECT 1 FROM bookmarked_videos WHERE videoId = :videoId)")
-    fun isBookmarked(videoId: Long): Flow<Boolean>
+    @Query("SELECT * FROM favorite_cats")
+    fun getAllFavoriteCats(): Flow<List<String>>
 }
