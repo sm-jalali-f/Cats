@@ -30,6 +30,7 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
@@ -68,8 +69,17 @@ fun CatListScreen(
     navController: NavController,
     viewModel: CatListViewModel = hiltViewModel(),
 ) {
+    val loading = viewModel.loadingState.collectAsState()
     Column {
         SearchField(viewModel = viewModel)
+        if(loading.value) {
+            LinearProgressIndicator(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 0.dp),
+                color = MaterialTheme.colorScheme.primary, // You can change the color here
+            )
+        }
         Spacer(modifier = Modifier.height(5.dp))
         GridGallery(viewModel = viewModel, navController = navController)
     }
@@ -206,14 +216,6 @@ fun GridViewItem(
 @Composable
 fun SearchField(modifier: Modifier = Modifier, viewModel: CatListViewModel) {
     val searchQuery = rememberSaveable { mutableStateOf("") }
-//    val isInitialized = rememberSaveable { mutableStateOf(false) }
-
-//    LaunchedEffect(Unit) { // Trigger first created
-//        if (!isInitialized.value) {
-//            viewModel.onSearchQueryChanged(searchQuery.value)
-//            isInitialized.value = true
-//        }
-//    }
     OutlinedTextField(
         value = searchQuery.value,
         maxLines = 1,
@@ -224,8 +226,8 @@ fun SearchField(modifier: Modifier = Modifier, viewModel: CatListViewModel) {
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 8.dp),
-        label = { Text("Search...") },
+            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 2.dp),
+        label = { Text("Search") },
     )
 }
 
