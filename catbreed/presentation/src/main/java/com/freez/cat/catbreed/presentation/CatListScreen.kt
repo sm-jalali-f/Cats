@@ -53,6 +53,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
@@ -83,7 +84,7 @@ fun GridGallery(
     navController: NavController
 ) {
 
-    val catList = viewModel.catList.collectAsState()
+    val catList = viewModel.catList.collectAsStateWithLifecycle()
     val listState = rememberLazyGridState()
     LaunchedEffect(listState) {
         snapshotFlow { listState.layoutInfo }
