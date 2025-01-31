@@ -1,6 +1,5 @@
 package com.freez.cat.catbreed.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.freez.cat.catbreed.domain.FavoriteCatUseCase
@@ -31,33 +30,12 @@ class CatListViewModel @Inject constructor(
     private var currentPage = 0
     private var isLastPage = false
 
-    fun loadData() {
+    private fun loadData() {
         if (_loadingState.value || isLastPage) return
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             catUseCase.execute(currentPage).collect { result ->
-                when (result) {
-                    is Resource.Loading -> {
-                        _loadingState.value = true
-                    }
-
-                    is Resource.Success -> {
-                        result.data?.let { data ->
-                            if (data.isNotEmpty()) {
-                                _catList.value += data
-                                currentPage++
-                            } else {
-                                isLastPage = true
-                            }
-                        }
-                        _loadingState.value = false
-                    }
-
-                    is Resource.Error -> {
-                        _errorState.value = result.message
-                        _loadingState.value = false
-                    }
-                }
+                updateState(result)
             }
         }
     }
@@ -67,12 +45,52 @@ class CatListViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(search: String) {
-
+        // TODO: Search Name
     }
 
     fun changeFavorite(catId: String, isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
             favoriteUseCase.changeCatFavorite(catId, isFavorite)
+        }
+    }
+
+    private fun updateState(result: Resource<List<CatBreed>>) {
+        when (result) {
+            is Resource.Loading -> {
+                _loadingState.value = true
+            }
+
+            is Resource.Success -> {
+                result.data?.let { newData ->
+                    updateData(newData)
+                }
+                _loadingState.value = false
+            }
+
+            is Resource.Error -> {
+                _errorState.value = result.message
+                _loadingState.value = false
+            }
+        }
+    }
+
+    private fun updateData(newData: List<CatBreed>) {
+        if (newData.isNotEmpty()) {
+            val currentList = _catList.value.toMutableList()
+
+            newData.forEach { newCat ->
+                val existingCatIndex =
+                    currentList.indexOfFirst { it.id == newCat.id }
+                if (existingCatIndex != -1) { // update exist data
+                    currentList[existingCatIndex] = newCat
+                } else {
+                    currentList.add(newCat) //add new data
+                }
+            }
+            _catList.value = currentList
+            currentPage++
+        } else {
+            isLastPage = true
         }
     }
 
