@@ -8,14 +8,15 @@ It uses **Clean Architecture**. Application architecture follows below image:
 
 ## Tech Stack
 
-- Clean Architecture
-- Gson
-- Retrofit
-- Room
-- Hilt
-- Flow
-- Coroutine
-- ViewModel
-- Jetpack Compose
-- Coil
-- Paging
+- **Clean Architecture:**
+- **Spotless:**
+- **Gson:**
+- **Retrofit:**
+- **Room:**
+- **Hilt:**
+- **Flow:**
+- **Coroutine:**
+- **ViewModel:**
+- **Jetpack Compose:**
+- **Coil:**
+- **Paging:**
