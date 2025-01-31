@@ -36,7 +36,6 @@ class CatListViewModel @Inject constructor(
 
         viewModelScope.launch {
             catUseCase.execute(currentPage).collect { result ->
-                Log.d("THE-CAT_API", "loadData: viewmodel")
                 when (result) {
                     is Resource.Loading -> {
                         _loadingState.value = true

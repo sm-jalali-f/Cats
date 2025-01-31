@@ -3,7 +3,7 @@ package com.freez.cat.catbreed.domain.models
 import com.freez.cat.core.util.Image
 import com.freez.cat.core.util.Weight
 
-class CatBreed(
+data class CatBreed(
     val id: String,
     val image: Image,
     val name: String,

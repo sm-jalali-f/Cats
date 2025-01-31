@@ -8,6 +8,9 @@ class FavoriteCatUseCaseImpl @Inject constructor(
     private val favoriteCatRepository: FavoriteCatRepository
 ) : FavoriteCatUseCase {
     override suspend fun changeCatFavorite(catBreedId: String, isFavorite: Boolean) {
-        favoriteCatRepository.changeFavorite(catBreedId, isFavorite)
+        if (isFavorite)
+            favoriteCatRepository.setFavorite(catBreedId)
+        else
+            favoriteCatRepository.removeFavorite(catBreedId)
     }
 }
