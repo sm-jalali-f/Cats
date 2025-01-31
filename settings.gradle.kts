@@ -23,3 +23,5 @@ rootProject.name = "Cats"
 include(":app")
 include(":data:remote:theCatApi")
 include(":data:local:roomDatabase")
+include(":catbreed:domain")
+include(":catbreed:presentation")
