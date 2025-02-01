@@ -64,7 +64,7 @@ fun NavGraph(modifier: Modifier = Modifier) {
 @Composable
 fun PixabayAppTopBar(scrollBehavior: TopAppBarScrollBehavior) {
     MediumTopAppBar(
-        title = { Text(text = "The Cat API", fontSize = 24.sp) },
+        title = { Text(text = "Cat Breed App", fontSize = 24.sp) },
         scrollBehavior = scrollBehavior,
         colors = TopAppBarDefaults.largeTopAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,

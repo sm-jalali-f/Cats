@@ -38,8 +38,8 @@ kapt {
 }
 dependencies {
     implementation(project(":core:util"))
-    implementation(project(":data:remote:theCatApi"))
-    implementation(project(":data:local:roomDatabase"))
+    implementation(project(":datasource:remote:theCatApi"))
+    implementation(project(":datasource:local:roomDatabase"))
     implementation(project(":catbreed:domain"))
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.core.ktx)

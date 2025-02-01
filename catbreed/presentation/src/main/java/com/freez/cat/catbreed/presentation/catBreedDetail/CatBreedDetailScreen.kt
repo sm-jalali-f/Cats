@@ -1,6 +1,5 @@
 package com.freez.cat.catbreed.presentation.catBreedDetail
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
@@ -11,8 +10,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -35,7 +32,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import com.freez.cat.catbreed.presentation.catBreedList.DisplayImage
-import com.freez.cat.core.util.Constant
 import com.freez.cat.core.util.getFlagUrl
 
 @OptIn(ExperimentalLayoutApi::class)
@@ -62,7 +58,7 @@ fun CatDetailScreen(
             contentDescription = catBreed?.name ?: "",
             modifier = Modifier
                 .fillMaxWidth()
-                .heightIn(150.dp,500.dp)
+                .heightIn(150.dp, 500.dp)
                 .clip(
                     shape = RoundedCornerShape(
                         topStart = 5.dp,
@@ -140,10 +136,13 @@ fun OriginPart(countryCode: String?, origin: String?) {
                 .size(coil3.size.Size.ORIGINAL)
                 .build(),
         )
-        ImageTextRowInfo(modifier = Modifier.padding(start = 10.dp), painter = painter, textValue = origin ?: "")
+        ImageTextRowInfo(
+            modifier = Modifier.padding(start = 10.dp),
+            painter = painter,
+            textValue = origin ?: ""
+        )
     }
 }
-
 
 
 @Composable

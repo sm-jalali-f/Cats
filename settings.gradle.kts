@@ -21,8 +21,8 @@ dependencyResolutionManagement {
 
 rootProject.name = "Cats"
 include(":app")
-include(":data:remote:theCatApi")
-include(":data:local:roomDatabase")
+include(":datasource:remote:theCatApi")
+include(":datasource:local:roomDatabase")
 include(":catbreed:domain")
 include(":catbreed:presentation")
 include(":catbreed:repository")
