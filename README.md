@@ -13,6 +13,7 @@ projects.
 ## Architecture
 
 It follows **Clean Architecture**. Application architecture follows below image:
+
 ![Document systems.png](./documents/software-architecture.png)
 
 **NOTE:**
@@ -41,5 +42,9 @@ although many people think the opposite)
     - **mockwebserver:** it is a scriptable web server for testing HTTP clients
     - **Mockito:** mocking framework used to mock classes and interfaces
   
+## TO Do
 
+- **Searching among cat breeds**
+- **ViewModel Test:** Unfortunately, Unfortunately, it fails due to Dispatcher.IO in the ViewModel, where the comparison happens before the changes in the ViewModel are applied
+- **Other Test Cases**
 
