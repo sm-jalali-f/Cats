@@ -4,8 +4,6 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.freez.cat.catbreed.domain.models.CatBreed
-import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
-import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
 import com.freez.cat.core.util.Constant
 import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
 import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
