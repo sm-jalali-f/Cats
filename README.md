@@ -1,10 +1,29 @@
 ## Description
 
-**Cat** is an Android application that shows cat's breeds.
+**Cat** is an Android application that shows cats' breeds.
 it uses the [TheCatApi](https://thecatapi.com/) to fetch data.
 
-[!Note] Due to the temporary nature of the project, some experimental features have been used.(such
-as `ExperimentalMaterial3Api`). I aware of the risks of using experimental features in production project.
+![](./documents/cats_list.mp4)
+![Finite Auto Retry](./documents/fetch_failed.mp4)
+![](./documents/description.jpg)
+
+---
+**NOTE**
+Due to the temporary nature of the project, some experimental features have been used.(such
+as `ExperimentalMaterial3Api`). I am aware of the risks of using experimental features in production projects.
+--- 
+
+## Architecture
+
+It follows **Clean Architecture**. Application architecture follows below image:
+![Document systems.png](./documents/software-architecture.png)
+
+---
+**NOTE**
+Please note that the dependencies are not exactly as shown by the arrows in the diagram.
+As you know, according to **Clean Architecture**, the **data module is dependent on the domain** (although many people think the opposite)
+---
+
 
 ## Tech Stack
 
@@ -25,9 +44,4 @@ as `ExperimentalMaterial3Api`). I aware of the risks of using experimental featu
     - **Mockito:** mocking framework used to mock classes and interfaces
   
 
-## Screenshots
-
-## Architecture
-
-It uses **Clean Architecture**. Application architecture follows below image:
 
