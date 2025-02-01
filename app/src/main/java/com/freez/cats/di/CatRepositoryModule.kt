@@ -1,8 +1,10 @@
 package com.freez.cats.di
 
+import com.freez.cat.catbreed.domain.repository.CatBreedDetailRepository
 import com.freez.cat.catbreed.domain.repository.CatBreedListRepository
 import com.freez.cat.catbreed.domain.repository.CombineCatFavoriteRepository
 import com.freez.cat.catbreed.domain.repository.FavoriteCatRepository
+import com.freez.cat.catbreed.repository.CatBreedDetailRepositoryImpl
 import com.freez.cat.catbreed.repository.CatBreedListRepositoryImpl
 import com.freez.cat.catbreed.repository.CombineCatFavoriteRepositoryImpl
 import com.freez.cat.catbreed.repository.FavoriteCatRepositoryImpl
@@ -36,6 +38,14 @@ class RepositoryModule {
         favoriteCatRepository: FavoriteCatRepository
     ): CombineCatFavoriteRepository {
         return CombineCatFavoriteRepositoryImpl(catBreedListRepository, favoriteCatRepository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCatBreedDetailRepository(
+        apiService: CatApiService
+    ): CatBreedDetailRepository {
+        return CatBreedDetailRepositoryImpl(apiService)
     }
 
 

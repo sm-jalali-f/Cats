@@ -1,42 +1,39 @@
 package com.freez.cat.catbreed.repository
 
-import android.util.Log
 import com.freez.cat.catbreed.domain.models.CatBreed
-import com.freez.cat.catbreed.domain.repository.CatBreedListRepository
-import com.freez.cat.core.util.Constant
+import com.freez.cat.catbreed.domain.repository.CatBreedDetailRepository
 import com.freez.cat.core.util.Resource
 import com.freez.cat.data.remote.theCatApi.CatApiService
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class CatBreedListRepositoryImpl @Inject constructor(
+class CatBreedDetailRepositoryImpl @Inject constructor(
     private val catApiService: CatApiService
-) : CatBreedListRepository {
-    override suspend fun getCatBreeds(page: Int): Flow<Resource<List<CatBreed>>> =
+) : CatBreedDetailRepository {
+    override suspend fun getDetail(catId: String): Flow<Resource<CatBreed>> =
         flow {
             emit(Resource.Loading())
             try {
-                val response = catApiService.getCatBreeds(page, Constant.PAGE_COUNT)
+                val response = catApiService.getCatBreedDetail(catId)
 
                 if (response.isSuccessful) {
-                    var catList = response.body()
-                    if (catList != null) {
-                        var mappedItem = catList.map { item ->
+                    var catResponse = response.body()
+                    if (catResponse != null) {
+                        var mappedItem =
                             CatBreed(
-                                id = item.id,
-                                name = item.name,
-                                image = item.image,
-                                origin = item.origin,
-                                countryCode = item.country_code,
-                                weight = item.weight,
-                                description = item.description,
-                                temperament = item.temperament.split(",")
+                                id = catResponse.id,
+                                name = catResponse.name,
+                                image = catResponse.image,
+                                origin = catResponse.origin,
+                                countryCode = catResponse.country_code,
+                                weight = catResponse.weight,
+                                description = catResponse.description,
+                                temperament = catResponse.temperament.split(",")
                                     .map { str -> str.trim() },
-                                intelligence = item.intelligence,
+                                intelligence = catResponse.intelligence,
                                 isFavorite = false
                             )
-                        }
                         emit(Resource.Success(mappedItem))
                     } else {
                         Resource.Error(response.message(), "body Response is null")
