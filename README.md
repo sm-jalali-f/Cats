@@ -1,7 +1,7 @@
 ## Description
 
 **Cat** is an Android application that shows cats' breeds.
-it uses the [TheCatApi](https://thecatapi.com/) to fetch data.
+it uses the [TheCatApi](https://thecatapi.com/) to fetch data. also, it has been developed in a **modular** way.
 
 ![Screenshots](https://github.com/sm-jalali-f/Cats/tree/main/documents)
 
@@ -18,8 +18,17 @@ It follows **Clean Architecture**. The application architecture follows below im
 
 **NOTE:**
 Please note that the dependencies are not exactly as shown by the arrows in the diagram.
-As you know, according to **Clean Architecture**, the **data module is dependent on the domain** (
+As you know, according to **Clean Architecture**, the **data layer is dependent on the domain** (
 although many people think the opposite)
+
+### Modules:
+- **:catbreed:domain**
+- **:catbreed:presentation**
+- **:catbreed:repository**
+- **:datasource:remote:theCatApi**
+- **:datasource:local:roomDatabase**
+- **:app**
+- **:core:util**
 
 ### UseCases:
 - **CatBreedListUseCase:** It is used for getting cats' breed list (It uses  CombineCatFavoriteRepository)
