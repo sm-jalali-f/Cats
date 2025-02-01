@@ -18,7 +18,10 @@ as `ExperimentalMaterial3Api`)
 - **ViewModel:** manage UI-related data in a lifecycle-conscious way
 - **Jetpack Compose:** modern toolkit for building native Android UI
 - **Coil:** image loading library
-
+- **Test:**
+    - **JUnit:** it is a simple framework to write repeatable tests
+    - **mockwebserver:** it is a scriptable web server for testing HTTP clients
+  
 
 ## Screenshots
 
