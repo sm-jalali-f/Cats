@@ -22,6 +22,7 @@ as `ExperimentalMaterial3Api`). I aware of the risks of using experimental featu
 - **Test:**
     - **JUnit:** it is a simple framework to write repeatable tests
     - **mockwebserver:** it is a scriptable web server for testing HTTP clients
+    - **Mockito:** mocking framework used to mock classes and interfaces
   
 
 ## Screenshots
