@@ -1,10 +1,9 @@
 package com.freez.cat.catbreed.presentation
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.freez.cat.catbreed.domain.FavoriteCatUseCase
-import com.freez.cat.catbreed.domain.GetCatBreedUseCase
+import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
+import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
 import com.freez.cat.catbreed.domain.models.CatBreed
 import com.freez.cat.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatListViewModel @Inject constructor(
-    private val catUseCase: GetCatBreedUseCase,
-    private val favoriteUseCase: FavoriteCatUseCase,
+    private val catUseCase: CatBreedListUseCase,
+    private val favoriteUseCase: ToggleFavoriteCatUseCase,
 ) : ViewModel() {
     private var _catList = MutableStateFlow<List<CatBreed>>(emptyList())
     val catList: StateFlow<List<CatBreed>> get() = _catList
@@ -35,7 +34,7 @@ class CatListViewModel @Inject constructor(
         if (_loadingState.value || isLastPage) return
 
         viewModelScope.launch {
-            catUseCase.execute(currentPage).collect { result ->
+            catUseCase.invoke(currentPage).collect { result ->
                 when (result) {
                     is Resource.Loading -> {
                         _loadingState.value = true
@@ -72,7 +71,7 @@ class CatListViewModel @Inject constructor(
 
     fun changeFavorite(catId: String, isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            favoriteUseCase.changeCatFavorite(catId, isFavorite)
+            favoriteUseCase.invoke(catId, isFavorite)
         }
     }
 

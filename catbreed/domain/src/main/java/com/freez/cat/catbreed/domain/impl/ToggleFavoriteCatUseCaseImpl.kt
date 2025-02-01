@@ -1,13 +1,13 @@
 package com.freez.cat.catbreed.domain.impl
 
-import com.freez.cat.catbreed.domain.FavoriteCatUseCase
 import com.freez.cat.catbreed.domain.repository.FavoriteCatRepository
+import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
 import javax.inject.Inject
 
-class FavoriteCatUseCaseImpl @Inject constructor(
+class ToggleFavoriteCatUseCaseImpl @Inject constructor(
     private val favoriteCatRepository: FavoriteCatRepository
-) : FavoriteCatUseCase {
-    override suspend fun changeCatFavorite(catBreedId: String, isFavorite: Boolean) {
+) : ToggleFavoriteCatUseCase {
+    override suspend fun invoke(catBreedId: String, isFavorite: Boolean) {
         if (isFavorite)
             favoriteCatRepository.setFavorite(catBreedId)
         else

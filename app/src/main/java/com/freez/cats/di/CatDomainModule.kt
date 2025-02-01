@@ -1,11 +1,11 @@
 package com.freez.cats.di
 
-import com.freez.cat.catbreed.domain.FavoriteCatUseCase
-import com.freez.cat.catbreed.domain.GetCatBreedUseCase
-import com.freez.cat.catbreed.domain.impl.FavoriteCatUseCaseImpl
+import com.freez.cat.catbreed.domain.impl.ToggleFavoriteCatUseCaseImpl
 import com.freez.cat.catbreed.domain.impl.GetCatBreedUseCaseImpl
-import com.freez.cat.catbreed.domain.repository.CatBreedListRepository
+import com.freez.cat.catbreed.domain.repository.CombineCatFavoriteRepository
 import com.freez.cat.catbreed.domain.repository.FavoriteCatRepository
+import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
+import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,14 +16,13 @@ import dagger.hilt.android.components.ViewModelComponent
 class CatDomainModule {
     @Provides
     fun provideCatListListUseCase(
-        catListRepository: CatBreedListRepository,
-        favoriteRepository: FavoriteCatRepository,
-    ): GetCatBreedUseCase {
-        return GetCatBreedUseCaseImpl(catListRepository, favoriteRepository)
+        repository: CombineCatFavoriteRepository
+    ): CatBreedListUseCase {
+        return GetCatBreedUseCaseImpl(repository)
     }
 
     @Provides
-    fun provideFavoriteCatUseCase(favoriteCatRepository: FavoriteCatRepository): FavoriteCatUseCase {
-        return FavoriteCatUseCaseImpl(favoriteCatRepository)
+    fun provideFavoriteCatUseCase(favoriteCatRepository: FavoriteCatRepository): ToggleFavoriteCatUseCase {
+        return ToggleFavoriteCatUseCaseImpl(favoriteCatRepository)
     }
 }
