@@ -45,6 +45,9 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    //mockWebServer
+    testImplementation("com.squareup.okhttp3:mockwebserver:4.11.0")
+
     //retrofit
     implementation (libs.retrofit)
     implementation (libs.converter.gson)
