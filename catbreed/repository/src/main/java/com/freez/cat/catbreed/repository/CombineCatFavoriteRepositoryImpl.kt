@@ -1,6 +1,5 @@
 package com.freez.cat.catbreed.repository
 
-import android.util.Log
 import com.freez.cat.catbreed.domain.models.CatBreed
 import com.freez.cat.catbreed.domain.repository.CatBreedListRepository
 import com.freez.cat.catbreed.domain.repository.CombineCatFavoriteRepository
@@ -13,7 +12,7 @@ import javax.inject.Inject
 class CombineCatFavoriteRepositoryImpl @Inject constructor(
     private val catBreedListRepository: CatBreedListRepository,
     private val favoriteCatRepository: FavoriteCatRepository,
-): CombineCatFavoriteRepository {
+) : CombineCatFavoriteRepository {
     override suspend fun getCatBreeds(page: Int): Flow<Resource<List<CatBreed>>> {
         val catBreedsFlow = catBreedListRepository.getCatBreeds(page)
 
@@ -31,11 +30,11 @@ class CombineCatFavoriteRepositoryImpl @Inject constructor(
                 }
 
                 is Resource.Error -> {
-                    return@combine catBreedsResource
+                    catBreedsResource
                 }
 
                 is Resource.Loading -> {
-                    Resource.Loading()
+                    catBreedsResource
                 }
 
             }

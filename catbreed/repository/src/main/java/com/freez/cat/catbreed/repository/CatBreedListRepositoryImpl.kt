@@ -1,11 +1,11 @@
 package com.freez.cat.catbreed.repository
 
-import android.util.Log
 import com.freez.cat.catbreed.domain.models.CatBreed
 import com.freez.cat.catbreed.domain.repository.CatBreedListRepository
 import com.freez.cat.core.util.Constant
 import com.freez.cat.core.util.Resource
 import com.freez.cat.data.remote.theCatApi.CatApiService
+import com.freez.cat.data.remote.theCatApi.entity.CatBreedResponseItem
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
@@ -23,30 +23,35 @@ class CatBreedListRepositoryImpl @Inject constructor(
                     var catList = response.body()
                     if (catList != null) {
                         var mappedItem = catList.map { item ->
-                            CatBreed(
-                                id = item.id,
-                                name = item.name,
-                                image = item.image,
-                                origin = item.origin,
-                                countryCode = item.country_code,
-                                weight = item.weight,
-                                description = item.description,
-                                temperament = item.temperament.split(",")
-                                    .map { str -> str.trim() },
-                                intelligence = item.intelligence,
-                                isFavorite = false
-                            )
+
+                            item.toCatBreed()
                         }
                         emit(Resource.Success(mappedItem))
                     } else {
-                        Resource.Error(response.message(), "body Response is null")
+                        emit(Resource.Error(response.message()))
                     }
                 } else {
-                    Resource.Error(response.message(), "Response is unsuccessful")
+                    emit(Resource.Error(response.message()))
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                Resource.Error(e.localizedMessage ?: "An unexpected error occurred", e)
+                emit(Resource.Error(e.localizedMessage ?: "An unexpected error occurred"))
             }
         }
+}
+
+private fun CatBreedResponseItem.toCatBreed(): CatBreed {
+    return CatBreed(
+        id = this.id,
+        name = this.name,
+        image = this.image,
+        origin = this.origin,
+        countryCode = this.country_code,
+        weight = this.weight,
+        description = this.description,
+        temperament = this.temperament.split(",")
+            .map { str -> str.trim() },
+        intelligence = this.intelligence,
+        isFavorite = false
+    )
 }

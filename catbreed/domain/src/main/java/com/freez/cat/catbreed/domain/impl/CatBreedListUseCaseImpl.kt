@@ -7,7 +7,7 @@ import com.freez.cat.core.util.Resource
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class GetCatBreedUseCaseImpl @Inject constructor(
+class CatBreedListUseCaseImpl @Inject constructor(
     private val repository: CombineCatFavoriteRepository,
 ) : CatBreedListUseCase {
     override suspend fun invoke(page: Int): Flow<Resource<List<CatBreed>>> {

@@ -1,7 +1,7 @@
 package com.freez.cats.di
 
 import com.freez.cat.catbreed.domain.impl.CatBreedDetailUseCaseImpl
-import com.freez.cat.catbreed.domain.impl.GetCatBreedUseCaseImpl
+import com.freez.cat.catbreed.domain.impl.CatBreedListUseCaseImpl
 import com.freez.cat.catbreed.domain.impl.ToggleFavoriteCatUseCaseImpl
 import com.freez.cat.catbreed.domain.repository.CatBreedDetailRepository
 import com.freez.cat.catbreed.domain.repository.CombineCatFavoriteRepository
@@ -21,7 +21,7 @@ class CatDomainModule {
     fun provideCatListListUseCase(
         repository: CombineCatFavoriteRepository
     ): CatBreedListUseCase {
-        return GetCatBreedUseCaseImpl(repository)
+        return CatBreedListUseCaseImpl(repository)
     }
 
     @Provides

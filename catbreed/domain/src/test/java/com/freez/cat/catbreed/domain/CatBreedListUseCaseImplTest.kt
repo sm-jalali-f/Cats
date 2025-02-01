@@ -1,6 +1,6 @@
 package com.freez.cat.catbreed.domain
 
-import com.freez.cat.catbreed.domain.impl.GetCatBreedUseCaseImpl
+import com.freez.cat.catbreed.domain.impl.CatBreedListUseCaseImpl
 import com.freez.cat.catbreed.domain.models.CatBreed
 import com.freez.cat.catbreed.domain.repository.CombineCatFavoriteRepository
 import com.freez.cat.core.util.Image
@@ -16,7 +16,7 @@ import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class GetCatBreedUseCaseImplTest {
+class CatBreedListUseCaseImplTest {
 
     private val repository: CombineCatFavoriteRepository = mock()
 
@@ -51,7 +51,7 @@ class GetCatBreedUseCaseImplTest {
 
         whenever(repository.getCatBreeds(0)).thenReturn(flowOf(Resource.Success(mockCatBreeds)))
 
-        val useCase = GetCatBreedUseCaseImpl(repository)
+        val useCase = CatBreedListUseCaseImpl(repository)
 
         val result = useCase.invoke(0).first()
 
@@ -64,7 +64,7 @@ class GetCatBreedUseCaseImplTest {
         val errorMessage = "Network error"
         whenever(repository.getCatBreeds(0)).thenReturn(flowOf(Resource.Error(errorMessage)))
 
-        val useCase = GetCatBreedUseCaseImpl(repository)
+        val useCase = CatBreedListUseCaseImpl(repository)
 
         val result = useCase.invoke(0).first()
 

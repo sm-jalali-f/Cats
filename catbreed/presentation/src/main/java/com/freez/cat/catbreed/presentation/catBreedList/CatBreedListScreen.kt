@@ -1,5 +1,6 @@
 package com.freez.cat.catbreed.presentation.catBreedList
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -37,7 +38,6 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
@@ -51,9 +51,9 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -61,6 +61,7 @@ import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.freez.cat.catbreed.domain.models.CatBreed
+import com.freez.cat.core.util.Constant
 import com.freez.cat.core.util.Screen
 import com.freez.cat.core.util.getFlagUrl
 import kotlinx.coroutines.flow.collect
@@ -74,15 +75,32 @@ fun CatListScreen(
     navController: NavController,
     viewModel: CatBreedListViewModel = hiltViewModel(),
 ) {
-    val loading = viewModel.loadingState.collectAsState()
+    val loading = viewModel.loadingState.collectAsStateWithLifecycle()
+    val errorState = viewModel.errorState.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+    LaunchedEffect(errorState.value) {
+        errorState?.value?.let {
+            Toast.makeText(context, it, Toast.LENGTH_LONG).show()
+        }
+    }
+
     Column {
+        if (errorState.value.equals(Constant.FAILED_COMPLETELY)) {
+            Text(
+                modifier = Modifier.fillMaxWidth(),
+                textAlign = TextAlign.Center,
+                text = "${errorState?.value} \nCheck your Internet and proxy",
+                color = Color.Red,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
         SearchField(viewModel = viewModel)
         if (loading.value) {
             LinearProgressIndicator(
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(start = 16.dp, end = 16.dp, top = 0.dp, bottom = 0.dp),
-                color = MaterialTheme.colorScheme.primary, // You can change the color here
+                color = MaterialTheme.colorScheme.primary,
             )
         }
         Spacer(modifier = Modifier.height(5.dp))
@@ -105,7 +123,7 @@ fun GridGallery(
             .map { layoutInfo ->
                 val totalItems = layoutInfo.totalItemsCount
                 val lastVisibleItemIndex = layoutInfo.visibleItemsInfo.lastOrNull()?.index ?: 0
-                if (lastVisibleItemIndex >= totalItems - 2) {
+                if (lastVisibleItemIndex >= totalItems - 2 && totalItems != 0) {
                     viewModel.loadMoreData()
                 }
             }
@@ -239,7 +257,7 @@ fun SearchField(modifier: Modifier = Modifier, viewModel: CatBreedListViewModel)
         },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(start = 16.dp, top = 16.dp, end = 16.dp, bottom = 2.dp),
+            .padding(start = 16.dp, top = 10.dp, end = 16.dp, bottom = 2.dp),
         label = { Text("Search") },
     )
 }
@@ -255,7 +273,7 @@ fun DisplayImage(
 ) {
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current).data(imageUrl)
-            .size(coil3.size.Size.ORIGINAL) // Set the target size to load the image at.
+            .size(coil3.size.Size.ORIGINAL)
             .memoryCacheKey("image-$id")
             .crossfade(true)
             .build(),
@@ -307,7 +325,7 @@ fun FlagImage(modifier: Modifier = Modifier, countryCode: String?, flagSize: Dp)
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(url)
-            .size(coil3.size.Size.ORIGINAL) // Set the target size to load the image at.
+            .size(coil3.size.Size.ORIGINAL)
             .build(),
     )
     Image(

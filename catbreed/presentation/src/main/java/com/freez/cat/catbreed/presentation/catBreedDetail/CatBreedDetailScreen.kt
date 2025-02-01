@@ -137,7 +137,7 @@ fun OriginPart(countryCode: String?, origin: String?) {
         val painter = rememberAsyncImagePainter(
             model = ImageRequest.Builder(LocalContext.current)
                 .data(countryCode.getFlagUrl())
-                .size(coil3.size.Size.ORIGINAL) // Set the target size to load the image at.
+                .size(coil3.size.Size.ORIGINAL)
                 .build(),
         )
         ImageTextRowInfo(modifier = Modifier.padding(start = 10.dp), painter = painter, textValue = origin ?: "")
