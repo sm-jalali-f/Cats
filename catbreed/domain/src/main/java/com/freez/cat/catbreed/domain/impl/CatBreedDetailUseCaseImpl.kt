@@ -11,6 +11,6 @@ class CatBreedDetailUseCaseImpl @Inject constructor(
     private val repository: CatBreedDetailRepository
 ) : CatBreedDetailUseCase {
     override suspend fun invoke(catId: String): Flow<Resource<CatBreed>> {
-        TODO("Not yet implemented")
+        return repository.getDetail(catId)
     }
 }

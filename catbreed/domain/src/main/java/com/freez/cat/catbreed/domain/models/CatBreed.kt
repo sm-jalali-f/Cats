@@ -5,7 +5,7 @@ import com.freez.cat.core.util.Weight
 
 data class CatBreed(
     val id: String,
-    val image: Image,
+    val image: Image?,
     val name: String,
     val origin: String,
     val countryCode: String,

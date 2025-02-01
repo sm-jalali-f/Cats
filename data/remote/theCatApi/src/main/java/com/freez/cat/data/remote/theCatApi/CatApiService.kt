@@ -5,6 +5,7 @@ import com.freez.cat.data.remote.theCatApi.entity.CatBreedResponseItem
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Headers
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface CatApiService {
@@ -17,8 +18,8 @@ interface CatApiService {
     ): Response<CatBreedResponse>
 
     @Headers("Content-Type: application/json")
-    @GET("v1/breeds/:breed_id")
+    @GET("v1/breeds/{breed_id}")
     suspend fun getCatBreedDetail(
-        @Query("breed_id") catBreedId: String,
+        @Path("breed_id") catBreedId: String,
     ): Response<CatBreedResponseItem>
 }

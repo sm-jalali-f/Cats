@@ -43,11 +43,17 @@ fun NavGraph(modifier: Modifier = Modifier) {
             }
             composable(
                 route = Screen.CatDetailScreen.route,
-                arguments = listOf(navArgument("catId") { type = NavType.LongType }),
+                arguments = listOf(
+                    navArgument("catId") { type = NavType.StringType },
+                    navArgument("imageUrl") { type = NavType.StringType }
+                ),
             ) { backStackEntry ->
                 val catId = backStackEntry.arguments?.getString("catId")
-                catId?.let {
-                    CatDetailScreen(catId = it)
+                val imageUrl = backStackEntry.arguments?.getString("imageUrl")
+                catId?.let { id->
+                    imageUrl?.let { url->
+                        CatDetailScreen(catBreedId = id,imageUrl = url)
+                    }
                 }
             }
         }

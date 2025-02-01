@@ -1,6 +1,5 @@
 package com.freez.cat.catbreed.presentation.catBreedList
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -14,6 +13,7 @@ import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -53,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -61,8 +62,11 @@ import coil3.request.ImageRequest
 import coil3.request.crossfade
 import com.freez.cat.catbreed.domain.models.CatBreed
 import com.freez.cat.core.util.Screen
+import com.freez.cat.core.util.getFlagUrl
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.map
+import java.net.URLEncoder
+import java.nio.charset.StandardCharsets
 import java.util.Locale
 
 @Composable
@@ -73,7 +77,7 @@ fun CatListScreen(
     val loading = viewModel.loadingState.collectAsState()
     Column {
         SearchField(viewModel = viewModel)
-        if(loading.value) {
+        if (loading.value) {
             LinearProgressIndicator(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -119,8 +123,14 @@ fun GridGallery(
                     .padding(start = 4.dp, end = 4.dp, bottom = 6.dp, top = 6.dp),
                 catBreed = item,
                 onItemClick = { cat ->
+
+                    val encodedUrl =
+                        URLEncoder.encode(cat.image?.url, StandardCharsets.UTF_8.toString())
                     navController.navigate(
-                        Screen.CatDetailScreen.createRoute(catId = cat.id)
+                        Screen.CatDetailScreen.createRoute(
+                            catId = cat.id,
+                            imageUrl = encodedUrl
+                        )
                     )
                 },
                 onFavoriteClick = { cat ->
@@ -160,7 +170,7 @@ fun GridViewItem(
             ) {
                 DisplayImage(
                     id = catBreed.id,
-                    imageUrl = catBreed.image.url,
+                    imageUrl = catBreed.image?.url ?: "",
                     contentDescription = catBreed.name,
                     modifier = Modifier.clip(
                         shape = RoundedCornerShape(
@@ -168,6 +178,8 @@ fun GridViewItem(
                             topEnd = 5.dp,
                         ),
                     ),
+                    minHeight = 140.dp,
+                    maxHeight = 140.dp
                 )
             }
 
@@ -238,6 +250,8 @@ fun DisplayImage(
     imageUrl: String,
     contentDescription: String,
     modifier: Modifier = Modifier,
+    minHeight: Dp = 140.dp,
+    maxHeight: Dp = 300.dp
 ) {
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current).data(imageUrl)
@@ -250,7 +264,7 @@ fun DisplayImage(
         modifier = Modifier
             .defaultMinSize(minHeight = 50.dp)
             .fillMaxWidth()
-            .height(140.dp)
+            .heightIn(minHeight, maxHeight)
             .clip(RoundedCornerShape(size = 8.dp)),
         painter = painter,
         contentScale = ContentScale.Fit,
@@ -289,8 +303,7 @@ private fun String.capitalizeFirstChar(): String {
 
 @Composable
 fun FlagImage(modifier: Modifier = Modifier, countryCode: String?, flagSize: Dp) {
-    val url = "https://flagcdn.com/w320/${countryCode.toString().toLowerCase()}.png"
-    Log.d("FlagImage", "FlagImage: $url")
+    val url = countryCode.getFlagUrl()
     val painter = rememberAsyncImagePainter(
         model = ImageRequest.Builder(LocalContext.current)
             .data(url)
