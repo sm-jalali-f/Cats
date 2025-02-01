@@ -19,6 +19,7 @@ as `ExperimentalMaterial3Api`). I aware of the risks of using experimental featu
 - **ViewModel:** manage UI-related data in a lifecycle-conscious way
 - **Jetpack Compose:** modern toolkit for building native Android UI
 - **Coil:** image loading library
+- **Mockito:** mocking framework used to mock classes and interfaces
 
 
 ## Screenshots
