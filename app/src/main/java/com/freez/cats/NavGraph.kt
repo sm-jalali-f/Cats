@@ -18,8 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.freez.cat.catbreed.presentation.CatDetailScreen
-import com.freez.cat.catbreed.presentation.CatListScreen
+import com.freez.cat.catbreed.presentation.catBreedDetail.CatDetailScreen
+import com.freez.cat.catbreed.presentation.catBreedList.CatListScreen
 import com.freez.cat.core.util.Screen
 
 

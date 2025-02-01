@@ -1,4 +1,4 @@
-package com.freez.cat.catbreed.presentation
+package com.freez.cat.catbreed.presentation.catBreedList
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -68,7 +68,7 @@ import java.util.Locale
 @Composable
 fun CatListScreen(
     navController: NavController,
-    viewModel: CatListViewModel = hiltViewModel(),
+    viewModel: CatBreedListViewModel = hiltViewModel(),
 ) {
     val loading = viewModel.loadingState.collectAsState()
     Column {
@@ -90,7 +90,7 @@ fun CatListScreen(
 @Composable
 fun GridGallery(
     modifier: Modifier = Modifier,
-    viewModel: CatListViewModel,
+    viewModel: CatBreedListViewModel,
     navController: NavController
 ) {
 
@@ -215,7 +215,7 @@ fun GridViewItem(
 
 
 @Composable
-fun SearchField(modifier: Modifier = Modifier, viewModel: CatListViewModel) {
+fun SearchField(modifier: Modifier = Modifier, viewModel: CatBreedListViewModel) {
     val searchQuery = rememberSaveable { mutableStateOf("") }
     OutlinedTextField(
         value = searchQuery.value,

@@ -1,4 +1,4 @@
-package com.freez.cat.catbreed.presentation
+package com.freez.cat.catbreed.presentation.catBreedList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CatListViewModel @Inject constructor(
+class CatBreedListViewModel @Inject constructor(
     private val catUseCase: CatBreedListUseCase,
     private val favoriteUseCase: ToggleFavoriteCatUseCase,
 ) : ViewModel() {
