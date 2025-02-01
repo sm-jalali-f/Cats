@@ -46,8 +46,8 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     // test
-    testImplementation ("androidx.room:room-testing:2.5.0")
-    testImplementation ("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.0")
+    testImplementation (libs.androidx.room.testing)
+    testImplementation (libs.kotlinx.coroutines.test)
 
     // hilt
     implementation(libs.hilt.android)
