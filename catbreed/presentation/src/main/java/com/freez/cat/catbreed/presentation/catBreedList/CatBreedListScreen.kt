@@ -253,7 +253,7 @@ fun SearchField(modifier: Modifier = Modifier, viewModel: CatBreedListViewModel)
         keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
         onValueChange = { newValue: String ->
             searchQuery.value = newValue
-            viewModel.onSearchQueryChanged(newValue)
+//            viewModel.onSearchQueryChanged(newValue)
         },
         modifier = Modifier
             .fillMaxWidth()

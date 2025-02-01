@@ -49,6 +49,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
+
+    // mocking dependencies
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
     // ui
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
