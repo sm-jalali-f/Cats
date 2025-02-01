@@ -4,7 +4,7 @@
 it uses the [TheCatApi](https://thecatapi.com/) to fetch data.
 
 [!Note] Due to the temporary nature of the project, some experimental features have been used.(such
-as `ExperimentalMaterial3Api`)
+as `ExperimentalMaterial3Api`). I aware of the risks of using experimental features in production project.
 
 ## Tech Stack
 
