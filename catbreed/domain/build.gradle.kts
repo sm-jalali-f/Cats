@@ -44,6 +44,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    // For Kotlin coroutines test
+    testImplementation(libs.kotlinx.coroutines.test)
+    // For mocking dependencies
+    testImplementation(libs.mockito.core)
+    testImplementation(libs.mockito.kotlin)
+
     //hilt
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
