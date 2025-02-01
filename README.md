@@ -3,9 +3,7 @@
 **Cat** is an Android application that shows cats' breeds.
 it uses the [TheCatApi](https://thecatapi.com/) to fetch data.
 
-![](./documents/cats_list.mp4)
-![Finite Auto Retry](./documents/fetch_failed.mp4)
-![](./documents/description.jpg)
+![Screenshots](https://github.com/sm-jalali-f/Cats/tree/main/documents)
 
 ---
 **NOTE**
