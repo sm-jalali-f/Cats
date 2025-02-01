@@ -12,7 +12,7 @@ projects.
 
 ## Architecture
 
-It follows **Clean Architecture**. Application architecture follows below image:
+It follows **Clean Architecture**. The application architecture follows below image:
 
 ![Document systems.png](./documents/software-architecture.png)
 
@@ -20,6 +20,17 @@ It follows **Clean Architecture**. Application architecture follows below image:
 Please note that the dependencies are not exactly as shown by the arrows in the diagram.
 As you know, according to **Clean Architecture**, the **data module is dependent on the domain** (
 although many people think the opposite)
+
+### UseCases:
+- **CatBreedListUseCase:** It is used for getting cats' breed list (It uses  CombineCatFavoriteRepository)
+- **CatBreedDetailUseCase:** It is used for getting a cat breed detail 
+- **ToggleFavoriteCatUseCase:** It is used for changing favorite cat
+
+### Repositories:
+- **CatBreedListRepository:** It is used for receiving cat list from CatApiService
+- **FavoriteCatRepository:** It is used for communicating with database
+- **CombineCatFavoriteRepository:** It combine two above repositories (It created because of single responsibility)
+- **CatBreedDetailRepository:** It is used for receiving cat detail from CatApiService
 
 ## Tech Stack
 
