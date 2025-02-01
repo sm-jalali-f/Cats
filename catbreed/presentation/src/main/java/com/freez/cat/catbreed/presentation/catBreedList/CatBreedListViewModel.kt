@@ -2,9 +2,9 @@ package com.freez.cat.catbreed.presentation.catBreedList
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
-import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
 import com.freez.cat.catbreed.domain.models.CatBreed
+import com.freez.cat.catbreed.domain.usecase.CatBreedListUseCase
+import com.freez.cat.catbreed.domain.usecase.ToggleFavoriteCatUseCase
 import com.freez.cat.core.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,7 +16,7 @@ import javax.inject.Inject
 @HiltViewModel
 class CatBreedListViewModel @Inject constructor(
     private val catUseCase: CatBreedListUseCase,
-    private val favoriteUseCase: ToggleFavoriteCatUseCase,
+    private val favoriteUseCase: ToggleFavoriteCatUseCase
 ) : ViewModel() {
     private var _catList = MutableStateFlow<List<CatBreed>>(emptyList())
     val catList: StateFlow<List<CatBreed>> get() = _catList
@@ -42,10 +42,6 @@ class CatBreedListViewModel @Inject constructor(
 
     fun loadMoreData() {
         loadData()
-    }
-
-    fun onSearchQueryChanged(search: String) {
-        // TODO: Search Name
     }
 
     fun changeFavorite(catId: String, isFavorite: Boolean) {

@@ -14,14 +14,15 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CatBreedDetailViewModel @Inject constructor(
-    private val catBreedDetailUseCase: CatBreedDetailUseCase
+    private val catBreedDetailUseCase: CatBreedDetailUseCase,
+
 ) : ViewModel() {
 
     private var _catBreed: MutableStateFlow<CatBreed?> = MutableStateFlow(null)
-    val catBreed: StateFlow<CatBreed?> = _catBreed
+    val catBreed: StateFlow<CatBreed?> get() = _catBreed
 
     private var _loadingState = MutableStateFlow(false)
-    val loadingState: StateFlow<Boolean> = _loadingState
+    val loadingState: StateFlow<Boolean> get() = _loadingState
 
     private var _errorState = MutableStateFlow<String?>(null)
     val errorState: StateFlow<String?> get() = _errorState
@@ -29,11 +30,12 @@ class CatBreedDetailViewModel @Inject constructor(
     private var _imageUrl = MutableStateFlow<String?>(null)
     val imageUrl: StateFlow<String?> get() = _imageUrl
 
-    private fun getCatBreedDetail(catBreedId: String) {
+    fun getCatBreedDetail(catBreedId: String) {
         _loadingState.value = true
         viewModelScope.launch(Dispatchers.IO) {
             catBreedDetailUseCase.invoke(catBreedId).collect { result ->
                 updateState(result)
+                println(catBreed.value)
             }
         }
 
