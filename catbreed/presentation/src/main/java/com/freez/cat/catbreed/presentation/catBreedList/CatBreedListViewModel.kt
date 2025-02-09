@@ -44,7 +44,7 @@ class CatBreedListViewModel @Inject constructor(
         if (_loadingState.value || isLastPage) return
 
         viewModelScope.launch(Dispatchers.IO) {
-            catUseCase.invoke(currentPage).collect { result ->
+            catUseCase(currentPage).collect { result ->
                 updateState(result)
             }
         }
@@ -56,7 +56,7 @@ class CatBreedListViewModel @Inject constructor(
 
     fun changeFavorite(catId: String, isFavorite: Boolean) {
         viewModelScope.launch(Dispatchers.IO) {
-            favoriteUseCase.invoke(catId, isFavorite)
+            favoriteUseCase(catId, isFavorite)
         }
     }
 

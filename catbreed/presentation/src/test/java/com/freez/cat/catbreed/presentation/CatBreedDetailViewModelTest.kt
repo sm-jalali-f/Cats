@@ -72,7 +72,7 @@ class CatBreedDetailViewModelTest {
             )
         val flow = flowOf(Resource.Success(catBreed))
 
-        whenever(catBreedDetailUseCase.invoke("nOpQr")).thenReturn(flow)
+        whenever(catBreedDetailUseCase("nOpQr")).thenReturn(flow)
 
         viewModel.getCatBreedDetail("nOpQr")
 

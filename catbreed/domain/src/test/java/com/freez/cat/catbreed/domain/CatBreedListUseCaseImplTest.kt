@@ -53,7 +53,7 @@ class CatBreedListUseCaseImplTest {
 
         val useCase = CatBreedListUseCaseImpl(repository)
 
-        val result = useCase.invoke(0).first()
+        val result = useCase(0).first()
 
         Assert.assertTrue(result is Resource.Success)
         assertEquals(mockCatBreeds, result.data)
@@ -66,7 +66,7 @@ class CatBreedListUseCaseImplTest {
 
         val useCase = CatBreedListUseCaseImpl(repository)
 
-        val result = useCase.invoke(0).first()
+        val result = useCase(0).first()
 
         assertTrue(result is Resource.Error)
         assertEquals(errorMessage, (result as Resource.Error).message)

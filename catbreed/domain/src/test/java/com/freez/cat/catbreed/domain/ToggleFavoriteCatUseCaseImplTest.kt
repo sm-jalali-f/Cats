@@ -18,7 +18,7 @@ class ToggleFavoriteCatUseCaseImplTest {
 
         val useCase = ToggleFavoriteCatUseCaseImpl(favoriteCatRepository)
 
-        useCase.invoke(catBreedId, isFavorite)
+        useCase(catBreedId, isFavorite)
 
         verify(favoriteCatRepository).setFavorite(catBreedId)
     }
@@ -30,7 +30,7 @@ class ToggleFavoriteCatUseCaseImplTest {
 
         val useCase = ToggleFavoriteCatUseCaseImpl(favoriteCatRepository)
 
-        useCase.invoke(catBreedId, isFavorite)
+        useCase(catBreedId, isFavorite)
 
         verify(favoriteCatRepository).removeFavorite(catBreedId)
     }

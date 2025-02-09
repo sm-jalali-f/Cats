@@ -33,7 +33,7 @@ class CatBreedDetailViewModel @Inject constructor(
     fun getCatBreedDetail(catBreedId: String) {
         _loadingState.value = true
         viewModelScope.launch(Dispatchers.IO) {
-            catBreedDetailUseCase.invoke(catBreedId).collect { result ->
+            catBreedDetailUseCase(catBreedId).collect { result ->
                 updateState(result)
                 println(catBreed.value)
             }

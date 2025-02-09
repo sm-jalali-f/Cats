@@ -119,7 +119,7 @@ class CatBreedListViewModelTest {
         )
         val flow = flowOf(Resource.Success(mockCatBreeds))
 
-        whenever(catBreedListUseCase.invoke(0)).thenReturn(flow)
+        whenever(catBreedListUseCase(0)).thenReturn(flow)
 
         viewModel.loadMoreData()
 
@@ -134,7 +134,7 @@ class CatBreedListViewModelTest {
         val errorMessage = "Failed to load data"
         val flow = flowOf(Resource.Error<List<CatBreed>>(errorMessage))
 
-        whenever(catBreedListUseCase.invoke(0)).thenReturn(flow)
+        whenever(catBreedListUseCase(0)).thenReturn(flow)
 
         viewModel.loadMoreData()
 
@@ -148,7 +148,7 @@ class CatBreedListViewModelTest {
     fun `test loadingState is set correctly`() = runTest {
         val flow = flowOf(Resource.Loading<List<CatBreed>>())
 
-        whenever(catBreedListUseCase.invoke(0)).thenReturn(flow)
+        whenever(catBreedListUseCase(0)).thenReturn(flow)
 
         viewModel.loadMoreData()
 

@@ -44,7 +44,7 @@ class CatBreedDetailUseCaseImplTest {
 
         val useCase = CatBreedDetailUseCaseImpl(catBreedDetailRepository)
 
-        val result = useCase.invoke(catId)
+        val result = useCase(catId)
 
         var resultResource: Resource<CatBreed>? = null
         result.collect { resultResource = it }
